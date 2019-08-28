@@ -17,6 +17,7 @@
             <con:stage id="_StageId-N3f57feda.N148839a2.0.16cd87c6dd7.N7ffd" name="Stage1">
                 <con:context>
                     <con1:userNsDecl prefix="exam" namespace="http://www.example.org"/>
+                    <con1:userNsDecl prefix="stud" namespace="http://www.oracle.com/BPELSOAPStudent/StudentDetailsRequest"/>
                     <con1:userNsDecl prefix="bpel" namespace="http://www.oracle.com/BPELSOAPStudent"/>
                 </con:context>
                 <con:actions>
@@ -26,25 +27,28 @@
                             <con1:xqueryTransform>
                                 <con1:resource ref="StudentSBProject/Resources/xq/xq_request_external"/>
                                 <con1:param name="request">
-                                    <con1:path>$body/bpel:execute/request/exam:StudentDetailsRequest</con1:path>
+                                    <con1:path>$body/stud:execute/request/exam:StudentDetailsRequest</con1:path>
                                 </con1:param>
                             </con1:xqueryTransform>
                         </con2:expr>
                     </con2:assign>
                 </con:actions>
             </con:stage>
-            <con:stage id="_StageId-N3f57feda.N148839a2.0.16cd87c6dd7.N7fc5" name="Stage2">
-                <con:context/>
+            <con:stage id="_StageId-N3f57feda.586a0319.0.16cd98fa13f.N7f9c" name="Stage2">
+                <con:context>
+                    <con1:userNsDecl prefix="exam" namespace="http://www.example.org"/>
+                    <con1:userNsDecl prefix="stud" namespace="http://www.oracle.com/BPELSOAPStudent/StudentDetailsResponse"/>
+                </con:context>
                 <con:actions>
                     <con2:wsCallout>
-                        <con1:id>_ActionId-N3f57feda.N148839a2.0.16cd87c6dd7.N7fc4</con1:id>
-                        <con2:service ref="StudentSBProject/BusinessService/studentDetails" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+                        <con1:id>_ActionId-N3f57feda.586a0319.0.16cd98fa13f.N7f9b</con1:id>
+                        <con2:service ref="StudentSBProject/BusinessService/studentDetailsBusinessService" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
                         <con2:operation>StudentDetails</con2:operation>
                         <con2:request>
                             <con2:body wrapped="false">request_external</con2:body>
                         </con2:request>
                         <con2:response>
-                            <con2:body wrapped="false">response_external</con2:body>
+                            <con2:body wrapped="false">response</con2:body>
                         </con2:response>
                         <con2:requestTransform/>
                         <con2:responseTransform/>
@@ -53,15 +57,26 @@
             </con:stage>
         </con:pipeline>
         <con:pipeline type="response" name="response-N3f57feda.N148839a2.0.16cd87c6dd7.N7ffe">
-            <con:stage id="_StageId-N3f57feda.N148839a2.0.16cd87c6dd7.N7ffc" name="Stage1">
+            <con:stage id="_StageId-N3f57feda.586a0319.0.16cd98fa13f.N7f92" name="Stage1">
                 <con:context>
-                    <con1:userNsDecl prefix="bpel" namespace="http://www.oracle.com/BPELSOAPStudent"/>
+                    <con1:userNsDecl prefix="exam" namespace="http://www.example.org"/>
+                    <con1:userNsDecl prefix="stud" namespace="http://www.oracle.com/BPELSOAPStudent/StudentDetailsResponse"/>
                 </con:context>
                 <con:actions>
-                    <con2:assign varName="external_response">
-                        <con1:id>_ActionId-N3f57feda.257db69.0.16cd8a2a4d5.N7ffb</con1:id>
+                    <con2:replace varName="body" contents-only="true">
+                        <con1:id>_ActionId-N3f57feda.586a0319.0.16cd98fa13f.N7f58</con1:id>
+                        <con2:location>
+                            <con1:xpathText>.</con1:xpathText>
+                        </con2:location>
                         <con2:expr>
-                            <con1:xqueryText>$body/bpel:executeResponse/response</con1:xqueryText>
+                            <con1:xqueryText>$response</con1:xqueryText>
+                        </con2:expr>
+                    </con2:replace>
+                    <con2:assign varName="responseVar">
+                        <con1:id>_ActionId-N3f57feda.586a0319.0.16cd98fa13f.N7f91</con1:id>
+                        <con1:disabled>true</con1:disabled>
+                        <con2:expr>
+                            <con1:xqueryText>$response</con1:xqueryText>
                         </con2:expr>
                     </con2:assign>
                 </con:actions>
