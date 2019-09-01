@@ -1,5 +1,5 @@
 <wsdl:definitions targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/StudentServiceBusApplication/StudentSBProject/dbDev" name="dbDev_db-concrete" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
-    <wsdl:import location="dbDev.wsdl" namespace="http://xmlns.oracle.com/pcbpel/adapter/db/StudentServiceBusApplication/StudentSBProject/dbDev"/>
+    <wsdl:import location="../Resources/databases/dbDev.wsdl" namespace="http://xmlns.oracle.com/pcbpel/adapter/db/StudentServiceBusApplication/StudentSBProject/dbDev"/>
     <wsdl:binding name="dbDev_ptt-binding" type="dbd:dbDev_ptt" xmlns:dbd="http://xmlns.oracle.com/pcbpel/adapter/db/StudentServiceBusApplication/StudentSBProject/dbDev">
         <soap:binding style="document" transport="http://www.bea.com/wli/sb/transports/jca"/>
         <wsdl:operation name="dbDev">
