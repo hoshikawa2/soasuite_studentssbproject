@@ -1,0 +1,11 @@
+<adapter-config name="dbDev" adapter="db" wsdlLocation="dbDev.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory UIConnectionName="dbDev" location="eis/DB/dev"/>
+  <endpoint-interaction portType="dbDev_ptt" operation="dbDev">
+    <interaction-spec className="oracle.tip.adapter.db.DBPureSQLInteractionSpec">
+      <property name="SqlString" value="SELECT REGISTRO1, REGISTRO2 FROM ENTRADA WHERE REGISTRO1 = ?"/>
+      <property name="GetActiveUnitOfWork" value="false"/>
+    </interaction-spec>
+  </endpoint-interaction>
+
+</adapter-config>
